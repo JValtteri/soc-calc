@@ -1,25 +1,33 @@
-import * as table from "./table.js"
 import * as cookie from "./cookie.js"
+import * as calc from "./calc.js"
 
 const body                 = document.getElementById('body');
 // Inputs
-const lengthInput          = document.getElementById('length');
-const thicknessInput       = document.getElementById('thickness');
-const widthInput           = document.getElementById('width');
-
-const cavityThicknessInput = document.getElementById('in-thickness');
-const cavityWidthInput     = document.getElementById('in-width');
-
-const forceInput           = document.getElementById('force');
-const momentInput          = document.getElementById('moment');
-const materialInput        = document.getElementById('moment');
-
+const systemInput          = document.getElementById('v-system');
+const typeInput            = document.getElementById('bat-type');
+const voltInput            = document.getElementById('voltage');
+const tempInput            = document.getElementById('temperature');
+const capacityInput        = document.getElementById('capacity');
 const cookieConsent        = document.getElementById('accept');
+
+// Outputs
+const socOc                = document.getElementById('soc-oc');
+const socLc                = document.getElementById('soc-lc');
+const remainOc             = document.getElementById('remain-oc');
+const remainLc             = document.getElementById('remain-lc');
+
 // Tables
-const case1table           = document.getElementById("case1");
-const case2table           = document.getElementById("case2");
-// Titles
-// Json Data
+const outputTable          = document.getElementById("output");
+
+// Variables
+let systemVoltage          = systemInput.value;
+let batteryType            = typeInput.value;
+let voltage                = voltInput.value;
+let temperature            = tempInput.value;
+let maxCapacity            = capacityInput.value;
+
+let calculated = false;
+
 
 /* Converts str to Base64, via uint8
  */
@@ -30,13 +38,13 @@ function base64(str) {
 }
 
 function activateUI() {
-    someButton.removeAttribute("disabled");      // Enables a button
-    someTitle.setAttribute("hidden", "");        // Hide a title
+    clearBtn.removeAttribute("disabled");      // Enables a button
+    outputTable.removeAttribute("hidden");
 }
 
-/* Sends sets the city name for weather request
- */
-async function submitCalculation() {
+function hideTables() {
+    clearBtn.setAttribute("disabled", "");      // Enables a button
+    outputTable.setAttribute("hidden", "");
 }
 
 function toggleFullscreen() {
@@ -58,6 +66,50 @@ function makeFullscreen() {
     }
 }
 
+function updateInputs() {
+    systemVoltage          = systemInput.value;
+    batteryType            = typeInput.value;
+    voltage                = voltInput.value;
+    temperature            = tempInput.value;
+    maxCapacity            = capacityInput.value;
+}
+
+function calculateSoc() {
+    const soc = calc.calculateSoc(temperature, voltage);
+    socOc.textContent = soc + " %";
+    const soclc = calc.calculateSoc(temperature, voltage+0.3);
+    socLc.textContent = soclc + " %";
+}
+
+function calculateRemaining() {
+    const remain = calc.calculateRemaining();
+    remainOc.textContent = remain + " Wh";
+    const remainOc = calc.calculateRemaining();
+    remainOc.textContent = remainOc + " Wh";
+}
+
+function update() {
+    updateInputs();
+    calculateSoc();
+    if (calculated) {
+        //color.removeColors(factors);         // Remove any old colors
+        //color.setColors(factors);       // Set new colors
+    }
+}
+
+function submit() {
+    calculated = true;
+    activateUI();
+    update();
+}
+
+function clear() {
+    clearOutputs();
+    clearBtn.setAttribute("disabled", "");
+    hideTables();
+    calculated = false;
+}
+
 /*
  * Buttons and Events
  */
@@ -70,14 +122,35 @@ const fullscreenBtn = document.getElementById("fullscreen");
 /* Submit button
  */
 submitButton.addEventListener("click", () => {
-    submitCalculation();
+    submit();
 });
 
 /* Clear button
  */
-reloadBtn.addEventListener("click", () => {
-    clearPage();
+clearBtn.addEventListener("click", () => {
+    clear();
 });
+
+/* On Enter key
+ */
+body.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        submit();
+    }
+});
+
+/* On Delete key
+ */
+body.addEventListener('keydown', (event) => {
+    if (event.key === "Delete") {
+        clear();
+    }
+});
+
+/* Any input value changed
+ */
+systemInput.addEventListener("change", update);
+//forceInput.addEventListener("change", update);
 
 /* "Remember Me" clicked
  */
@@ -115,7 +188,5 @@ if (cookieConsent.checked) {
     }
     cookieConsent.checked = true;
     submitCalculation();
-    if (ok === true) {
-        activateUI();
-    }
+    activateUI();
 }

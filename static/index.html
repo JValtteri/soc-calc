@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="static/img/logo.png">
     <link rel="stylesheet" href="css/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
                 <tr>
                     <th>Voltage system</th>
                     <td>
-                        <select type="text" id="v-system" value="12">
+                        <select type="text" id="v-system" value="12" disabled>
                             <option value="12">12 Volts</option>
                             <option value="24">24 Volts</option>
                             <option value="6">6 Volts</option>
@@ -30,8 +30,8 @@
                 <tr>
                     <th>Battery Type</th>
                     <td>
-                        <select type="text" id="bat-type" value="12">
-                            <option value="agb">AGM</option>
+                        <select type="text" id="bat-type" value="agm" disabled>
+                            <option value="agm">AGM</option>
                             <option value="lead">Lead Acid</option>
                         </select>
                     </td>
@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <th>Capacity</th>
-                    <td><input class="num-input" type="number" min="0" value="0" id="temperature" value="0"> Wh</td>
+                    <td><input class="num-input" type="number" min="0" value="0" id="capacity" value="0"> Wh</td>
                 </tr>
             </table>
             <br>
