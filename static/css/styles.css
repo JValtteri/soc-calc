@@ -11,6 +11,10 @@ body {
 
 h1 {
   color: #a0c0a0;
+  margin-bottom: 0px;
+  margin-top: 5px;
+  margin-right: 20px;
+  white-space: nowrap;
 }
 
 h2, h3, h4 {
@@ -20,11 +24,33 @@ h2, h3, h4 {
 }
 
 table {
-  border-collapse: collapse;
+  border-spacing: 0px;
+  border: 1px;
 }
 
 .table-container {
+  padding: 8px;
   overflow-x: scroll;
+}
+
+.column-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: scroll;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  flex-wrap: nowrap;
+}
+
+img  {
+  padding-top: 8px;
 }
 
 th, td {
@@ -50,12 +76,23 @@ td {
   font-size: large;
 }
 
+.warning {
+  border: 3px solid #e0e010 !important;
+  background-color: #050505 !important;
+  color: #e03020 !important;
+  border-radius: 6px;
+}
+
 input {
   background-color: #b0b0b0;
   color: #000000;
   border-radius: 6px;
   padding: 2px;
   font-size: large;
+}
+
+.output {
+  background-color: #808080;
 }
 
 select {
@@ -119,10 +156,11 @@ footer {
   color: #606060;
 }
 
-@media (max-width: 500px) {
-  .footer {
+@media (max-width: 630px) {
+  .footer, .column-container {
       flex-direction: column;
       text-align: center;
+      align-items: center;
   }
   .footer-column {
       margin-bottom: 10px;
@@ -134,6 +172,13 @@ footer {
   .top-column {
       margin-bottom: 10px;
       width: auto;
+  }
+  .title {
+    padding-bottom: 0px;
+    padding-top: 0px;
+  }
+  .h1 {
+    margin-right: 8px;
   }
 }
 
@@ -167,12 +212,20 @@ footer {
   background-color: #782818 !important;
 }
 
-.light-green {
+.yellow {
+  background-color: #787818 !important;
+}
+
+.green {
   background-color: #408d83 !important;
 }
 
 .dark-green {
   background-color: #1b4d46 !important;
+}
+
+.blue {
+  background-color: #20407b !important;
 }
 
 
@@ -185,9 +238,6 @@ footer {
   background-color: #34548f !important;
 }
 
-.dark-blue {
-  background-color: #20407b !important;
-}
 
 
 .white-blue {
