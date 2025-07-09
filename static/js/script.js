@@ -21,11 +21,12 @@ const remainLc             = document.getElementById('remain-lc');
 const outputTable          = document.getElementById("output");
 
 // Variables
-let systemVoltage          = systemInput.value;
+//let systemVoltage          = systemInput.value;
 let batteryType            = typeInput.value;
 let voltage                = voltInput.value;
 let temperature            = tempInput.value;
 let maxCapacity            = capacityInput.value;
+let batteryTypeData        = null;
 
 let calculated = false;
 
@@ -68,17 +69,22 @@ function makeFullscreen() {
 }
 
 function updateInputs() {
-    systemVoltage          = systemInput.value;
+    //systemVoltage          = systemInput.value;
     batteryType            = typeInput.value;
-    voltage                = voltInput.value;
-    temperature            = tempInput.value;
-    maxCapacity            = capacityInput.value;
+    voltage                = parseFloat(voltInput.value);
+    temperature            = parseFloat(tempInput.value);
+    maxCapacity            = parseFloat(capacityInput.value);
 }
 
 function updateSoc() {
-    const soc = calc.calculateSoc(temperature, voltage);
+    const cellVoltage = batteryTypeData.cell;
+    const cells = systemInput.value;
+    const voltCoefficient = batteryTypeData.voltCoefficient;
+    const nominalTemp = batteryTypeData.temperature;
+    const tempCoefficient = batteryTypeData.tempCoefficient;
+    const soc = calc.calculateSoc(temperature, voltage, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
     socOc.textContent = soc + " %";
-    const soclc = calc.calculateSoc(temperature, voltage+0.3);
+    const soclc = calc.calculateSoc(temperature, voltage+0.3, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
     socLc.textContent = soclc + " %";
 }
 
@@ -103,11 +109,12 @@ function batteryInsert(element, json, item) {
 }
 
 function voltageInsert(element, json, item) {
-    const nominalVoltage = json[item]*batteryType.cell;
+    const numberOfCells = json[item];
+    const nominalVoltage = json[item]*batteryTypeData.cell;
     const name = nominalVoltage.toFixed(1) + " Volts";
     const option = document.createElement('option');
     option.innerText = name;
-    option.value = (nominalVoltage);
+    option.value = (numberOfCells);
     element.appendChild(option);
 }
 
@@ -121,8 +128,8 @@ function populateSelect(element, json, func) {
 function updateVoltageSystem() {
     const element = systemInput;
     clearOptions(element);
-    batteryType = bat.getBatteryType(typeInput.value);
-    const cells = batteryType.sizes;
+    batteryTypeData = bat.getBatteryType(typeInput.value);
+    const cells = batteryTypeData.sizes;
     populateSelect(element, cells, voltageInsert);
 }
 
@@ -136,10 +143,10 @@ function updateBatteryTypes() {
 
 function update() {
     updateInputs();
-    updateSoc();
     //updateBatteryTypes();
     //updateVoltageSystem();
     if (calculated) {
+        updateSoc();
         //color.removeColors(factors);         // Remove any old colors
         //color.setColors(factors);       // Set new colors
     }
@@ -199,6 +206,9 @@ body.addEventListener('keydown', (event) => {
  */
 systemInput.addEventListener("change", update);
 typeInput.addEventListener("change", updateVoltageSystem);
+voltInput.addEventListener("change", update);
+tempInput.addEventListener("change", update);
+//capacityInput.addEventListener("change", update);
 
 /* "Remember Me" clicked
  */
