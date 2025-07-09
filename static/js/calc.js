@@ -2,8 +2,10 @@
  * calc module
  * Contains all used math functions
  */
-export function calculateSoc(temperature, voltage, voltageSystem) {
-    const soc = 100-((25.7+(temperature-25)*0.06)-voltage)/0.2775*10;
+export function calculateSoc(temperature, voltage, cellVoltage=2.14, cells=12, voltCoefficient=0.023125, nominalTemp, tempCoefficient=0.005) {
+    const nominalVoltage = cellVoltage*cells;
+    const temperatureCorrection = ( temperature - nominalTemp) * tempCoefficient * cells;
+    const soc = 100 - ( (nominalVoltage + temperatureCorrection ) - voltage) / (voltCoefficient * cells) * 10;
     return soc.toFixed(0);
 }
 

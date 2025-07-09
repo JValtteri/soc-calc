@@ -1,5 +1,6 @@
 import * as cookie from "./cookie.js"
 import * as calc from "./calc.js"
+import * as bat from "./battery.js"
 
 const body                 = document.getElementById('body');
 // Inputs
