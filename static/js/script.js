@@ -28,6 +28,10 @@ let temperature            = tempInput.value;
 let maxCapacity            = capacityInput.value;
 let batteryTypeData        = null;
 
+let soc                    = null;
+let cellVoltage            = null;
+let cells                  = null;
+
 let calculated = false;
 
 
@@ -77,28 +81,31 @@ function updateInputs() {
 }
 
 function updateSoc() {
-    const cellVoltage = batteryTypeData.cell;
-    const cells = systemInput.value;
+    cellVoltage = batteryTypeData.cell;
+    cells = systemInput.value;
     const voltCoefficient = batteryTypeData.voltCoefficient;
     const nominalTemp = batteryTypeData.temperature;
     const tempCoefficient = batteryTypeData.tempCoefficient;
-    let soc = calc.calculateSoc(temperature, voltage, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
+    soc = calc.calculateSoc(temperature, voltage, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
     if (soc < 0) {
         soc = 0;
     }
     socOc.textContent = soc + " %";
+    /*
     let soclc = calc.calculateSoc(temperature, voltage+0.3, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
     if (soclc < 0) {
         soclc = 0;
     }
     socLc.textContent = soclc + " %";
+    */
 }
 
 function updateRemaining() {
-    const remain = calc.calculateRemaining();
+    const ampHours = maxCapacity;
+    const remain = calc.calculateRemaining(voltage, ampHours, soc);
     remainOc.textContent = remain + " Wh";
-    const remainOc = calc.calculateRemaining();
-    remainOc.textContent = remainOc + " Wh";
+    //const remainOc = calc.calculateRemaining(systemVoltage, ampHours, stateOfCharge);
+    //remainOc.textContent = remainOc + " Wh";
 }
 
 function clearOptions(element) {
@@ -153,6 +160,7 @@ function update() {
     //updateVoltageSystem();
     if (calculated) {
         updateSoc();
+        updateRemaining();
         //color.removeColors(factors);         // Remove any old colors
         //color.setColors(factors);       // Set new colors
     }
