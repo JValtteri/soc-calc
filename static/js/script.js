@@ -93,7 +93,7 @@ function clearOptions(element) {
     element.innerHTML='';
 }
 
-function batteryInsert(item, json, element) {
+function batteryInsert(element, json, item) {
     const name = json[item].name;
     const type = item
     const option = document.createElement('option');
@@ -102,8 +102,8 @@ function batteryInsert(item, json, element) {
     element.appendChild(option);
 }
 
-function voltageInsert(item, json, element) {
-    const nominalVoltage = item*batteryType.cell;
+function voltageInsert(element, json, item) {
+    const nominalVoltage = json[item]*batteryType.cell;
     const name = nominalVoltage.toFixed(1) + " Volts";
     const option = document.createElement('option');
     option.innerText = name;
@@ -114,7 +114,7 @@ function voltageInsert(item, json, element) {
 function populateSelect(element, json, func) {
     element.removeAttribute("disabled");
     for (const item in json) {
-        func(item, json, element);
+        func(element, json, item);
     }
 }
 
@@ -131,13 +131,14 @@ function updateBatteryTypes() {
     clearOptions(element);
     const batteries = bat.getBatteryTypes();
     populateSelect(element, batteries, batteryInsert);
+    updateVoltageSystem();
 }
 
 function update() {
     updateInputs();
     updateSoc();
-    updateBatteryTypes();
-    updateVoltageSystem();
+    //updateBatteryTypes();
+    //updateVoltageSystem();
     if (calculated) {
         //color.removeColors(factors);         // Remove any old colors
         //color.setColors(factors);       // Set new colors
@@ -239,4 +240,4 @@ if (cookieConsent.checked) {
 }
 
 updateBatteryTypes();
-updateVoltageSystem();
+//updateVoltageSystem();
