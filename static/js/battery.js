@@ -50,14 +50,15 @@ const batteryTypes = {
         "temperature": 0,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.04
-    }/*,
+    },
     "lifepo": {                     // LiFePo
-        "cell": 0,
-        "sizes": [0],
+        "name": "LiFePo",
+        "cell": 13.6,
+        "sizes": [1],
         "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
-        "voltCoefficient": 0.0      // No voltage coefficient recorded
-    }*/
+        "voltCoefficient": 0.10588
+    }
 }
 
 export function getBatteryTypes() {
