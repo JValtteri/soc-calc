@@ -82,9 +82,15 @@ function updateSoc() {
     const voltCoefficient = batteryTypeData.voltCoefficient;
     const nominalTemp = batteryTypeData.temperature;
     const tempCoefficient = batteryTypeData.tempCoefficient;
-    const soc = calc.calculateSoc(temperature, voltage, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
+    let soc = calc.calculateSoc(temperature, voltage, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
+    if (soc < 0) {
+        soc = 0;
+    }
     socOc.textContent = soc + " %";
-    const soclc = calc.calculateSoc(temperature, voltage+0.3, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
+    let soclc = calc.calculateSoc(temperature, voltage+0.3, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
+    if (soclc < 0) {
+        soclc = 0;
+    }
     socLc.textContent = soclc + " %";
 }
 
