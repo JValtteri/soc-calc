@@ -6,7 +6,7 @@
 *.dll
 *.so
 *.dylib
-fem-online
+soc-calc
 
 # Test binary, built with `go test -c`
 *.test
