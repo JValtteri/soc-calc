@@ -198,7 +198,7 @@ body.addEventListener('keydown', (event) => {
 /* Any input value changed
  */
 systemInput.addEventListener("change", update);
-typeInput.addEventListener("change", update);
+typeInput.addEventListener("change", updateVoltageSystem);
 
 /* "Remember Me" clicked
  */
