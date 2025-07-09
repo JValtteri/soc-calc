@@ -210,7 +210,7 @@ systemInput.addEventListener("change", update);
 typeInput.addEventListener("change", updateVoltageSystem);
 voltInput.addEventListener("change", update);
 tempInput.addEventListener("change", update);
-//capacityInput.addEventListener("change", update);
+capacityInput.addEventListener("change", updateRemaining);
 
 /* "Remember Me" clicked
  */
