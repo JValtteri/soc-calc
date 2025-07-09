@@ -4,6 +4,7 @@
  */
 const batteryTypes = {
     "lead": {
+        "name": "Lead Acid",
         "cell": 2.105,
         "sizes": [3,6,12],
         "temperature": 15,
@@ -11,6 +12,7 @@ const batteryTypes = {
         "voltCoefficient": 0.012667
     },
     "agm": {
+        "name": "AGM",
         "cell": 2.14,               // single cell nominal voltage
         "sizes": [3,6,12],          // number of cells in typical batteries
         "temperature": 25,          // Nomanial at temperature
@@ -18,6 +20,7 @@ const batteryTypes = {
         "voltCoefficient": 0.023125 // Voltage change per 10% SoC
     },
     "alkaline": {
+        "name": "Alkaline",
         "cell": 1.6,
         "sizes": [1, 6],
         "temperature": 0,
@@ -25,25 +28,28 @@ const batteryTypes = {
         "voltCoefficient": 0.035
     },
     "nimh": {                       // Low accuracy! Voltage is a poor indicator for NiMH
+        "name": "NiMH",
         "cell": 1.40,
         "sizes": [1],
         "temperature": 0,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.0
     },
-    "lithium": {                    // Low accuracy!
-        "cell": 1.7,
-        "sizes": [1, 2, 3, 6],
-        "temperature": 0,
-        "tempCoefficient": 0.0,     // No temperature coefficient recorded
-        "voltCoefficient": 0.04
-    },
     "nicd": {
+        "name": "NiCd",
         "cell": 1.5,
         "sizes": [1, 2, 4, 8],
         "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.0342
+    },
+    "lithium": {                    // Low accuracy!
+        "name": "Lithium",
+        "cell": 1.7,
+        "sizes": [1, 2, 3, 6],
+        "temperature": 0,
+        "tempCoefficient": 0.0,     // No temperature coefficient recorded
+        "voltCoefficient": 0.04
     }/*,
     "lifepo": {                     // LiFePo
         "cell": 0,
@@ -52,4 +58,12 @@ const batteryTypes = {
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.0      // No voltage coefficient recorded
     }*/
+}
+
+export function getBatteryTypes() {
+    return batteryTypes;
+}
+
+export function getBatteryType(type) {
+    return batteryTypes[type];
 }

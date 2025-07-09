@@ -121,10 +121,10 @@ button {
   color: #f0f0f0;
 }
 
-button:disabled,
-button[disabled] {
-  color: #252525;
-  background-color: #606060;
+*:disabled,
+*[disabled] {
+  color: #252525 !important;
+  background-color: #606060 !important;
 }
 
 .top-ui {

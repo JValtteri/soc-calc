@@ -75,23 +75,69 @@ function updateInputs() {
     maxCapacity            = capacityInput.value;
 }
 
-function calculateSoc() {
+function updateSoc() {
     const soc = calc.calculateSoc(temperature, voltage);
     socOc.textContent = soc + " %";
     const soclc = calc.calculateSoc(temperature, voltage+0.3);
     socLc.textContent = soclc + " %";
 }
 
-function calculateRemaining() {
+function updateRemaining() {
     const remain = calc.calculateRemaining();
     remainOc.textContent = remain + " Wh";
     const remainOc = calc.calculateRemaining();
     remainOc.textContent = remainOc + " Wh";
 }
 
+function clearOptions(element) {
+    element.innerHTML='';
+}
+
+function batteryInsert(item, json, element) {
+    const name = json[item].name;
+    const type = item
+    const option = document.createElement('option');
+    option.innerText = name;
+    option.value = type;
+    element.appendChild(option);
+}
+
+function voltageInsert(item, json, element) {
+    const nominalVoltage = item*batteryType.cell;
+    const name = nominalVoltage.toFixed(1) + " Volts";
+    const option = document.createElement('option');
+    option.innerText = name;
+    option.value = (nominalVoltage);
+    element.appendChild(option);
+}
+
+function populateSelect(element, json, func) {
+    element.removeAttribute("disabled");
+    for (const item in json) {
+        func(item, json, element);
+    }
+}
+
+function updateVoltageSystem() {
+    const element = systemInput;
+    clearOptions(element);
+    batteryType = bat.getBatteryType(typeInput.value);
+    const cells = batteryType.sizes;
+    populateSelect(element, cells, voltageInsert);
+}
+
+function updateBatteryTypes() {
+    const element = typeInput;
+    clearOptions(element);
+    const batteries = bat.getBatteryTypes();
+    populateSelect(element, batteries, batteryInsert);
+}
+
 function update() {
     updateInputs();
-    calculateSoc();
+    updateSoc();
+    updateBatteryTypes();
+    updateVoltageSystem();
     if (calculated) {
         //color.removeColors(factors);         // Remove any old colors
         //color.setColors(factors);       // Set new colors
@@ -151,7 +197,7 @@ body.addEventListener('keydown', (event) => {
 /* Any input value changed
  */
 systemInput.addEventListener("change", update);
-//forceInput.addEventListener("change", update);
+typeInput.addEventListener("change", update);
 
 /* "Remember Me" clicked
  */
@@ -191,3 +237,6 @@ if (cookieConsent.checked) {
     submitCalculation();
     activateUI();
 }
+
+updateBatteryTypes();
+updateVoltageSystem();

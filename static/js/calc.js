@@ -2,6 +2,9 @@
  * calc module
  * Contains all used math functions
  */
+
+import * as bat from "./battery.js"
+
 export function calculateSoc(temperature, voltage, cellVoltage=2.14, cells=12, voltCoefficient=0.023125, nominalTemp, tempCoefficient=0.005) {
     const nominalVoltage = cellVoltage*cells;
     const temperatureCorrection = ( temperature - nominalTemp) * tempCoefficient * cells;
