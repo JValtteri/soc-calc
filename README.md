@@ -1,10 +1,8 @@
 # SoC Calc
 
-Web-app for calculating the state of charge (SoC) of a battery system.
-
 ## Description
 
-...
+Web-app for calculating the state of charge (SoC) of a battery system.
 
 ## Requirements
 
