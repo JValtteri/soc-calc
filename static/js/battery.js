@@ -43,14 +43,6 @@ const batteryTypes = {
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.0342
     },
-    "lithium": {                    // Low accuracy!
-        "name": "Lithium",
-        "cell": 1.7,
-        "sizes": [1, 2, 3, 6],
-        "temperature": 20,
-        "tempCoefficient": 0.0,     // No temperature coefficient recorded
-        "voltCoefficient": 0.04
-    },
     "lifepo": {                     // LiFePo
         "name": "LiFePo",
         "cell": 13.6,               // 13.6
@@ -58,6 +50,14 @@ const batteryTypes = {
         "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.10588  // 0.10588
+    },
+    "lithium": {                    // Low accuracy!
+        "name": "Lithium",
+        "cell": 1.7,
+        "sizes": [1, 2, 3, 6],
+        "temperature": 20,
+        "tempCoefficient": 0.0,     // No temperature coefficient recorded
+        "voltCoefficient": 0.04
     }
 }
 

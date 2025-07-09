@@ -73,7 +73,6 @@ function makeFullscreen() {
 }
 
 function updateInputs() {
-    //systemVoltage          = systemInput.value;
     batteryType            = typeInput.value;
     voltage                = parseFloat(voltInput.value);
     temperature            = parseFloat(tempInput.value);
@@ -91,21 +90,12 @@ function updateSoc() {
         soc = 0;
     }
     socOc.textContent = soc + " %";
-    /*
-    let soclc = calc.calculateSoc(temperature, voltage+0.3, cellVoltage, cells, voltCoefficient, nominalTemp, tempCoefficient);
-    if (soclc < 0) {
-        soclc = 0;
-    }
-    socLc.textContent = soclc + " %";
-    */
 }
 
 function updateRemaining() {
     const ampHours = maxCapacity;
     const remain = calc.calculateRemaining(voltage, ampHours, soc);
     remainOc.textContent = remain + " Wh";
-    //const remainOc = calc.calculateRemaining(systemVoltage, ampHours, stateOfCharge);
-    //remainOc.textContent = remainOc + " Wh";
 }
 
 function clearOptions(element) {
@@ -156,8 +146,6 @@ function updateBatteryTypes() {
 
 function update() {
     updateInputs();
-    //updateBatteryTypes();
-    //updateVoltageSystem();
     if (calculated) {
         updateSoc();
         updateRemaining();
