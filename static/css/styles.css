@@ -46,7 +46,6 @@ table {
   overflow-x: scroll;
   padding-bottom: 10px;
   padding-top: 20px;
-  flex-wrap: nowrap;
 }
 
 img  {
@@ -114,6 +113,11 @@ button {
   padding: 5px;
   height: 35px;
   padding-inline: 8px;
+}
+
+.buttons {
+  flex-wrap: nowrap;
+  flex-direction: row;
 }
 
 .focused {
