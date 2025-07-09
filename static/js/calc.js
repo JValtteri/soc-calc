@@ -13,5 +13,5 @@ export function calculateSoc(temperature, voltage, cellVoltage, cells, voltCoeff
 
 export function calculateRemaining(voltage, ampHours, stateOfCharge) {
     const remainingEnergy = voltage*ampHours*stateOfCharge/100;
-    return remainingEnergy;
+    return remainingEnergy.toFixed(0);
 }

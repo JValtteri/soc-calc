@@ -76,7 +76,6 @@ function updateInputs() {
     batteryType            = typeInput.value;
     voltage                = parseFloat(voltInput.value);
     temperature            = parseFloat(tempInput.value);
-    maxCapacity            = parseFloat(capacityInput.value);
 }
 
 function updateSoc() {
@@ -93,6 +92,7 @@ function updateSoc() {
 }
 
 function updateRemaining() {
+    maxCapacity = parseFloat(capacityInput.value);
     const ampHours = maxCapacity;
     const remain = calc.calculateRemaining(voltage, ampHours, soc);
     remainOc.textContent = remain + " Wh";
