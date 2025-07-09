@@ -23,17 +23,17 @@ const batteryTypes = {
         "name": "Alkaline",
         "cell": 1.6,
         "sizes": [1, 6],
-        "temperature": 0,
+        "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.035
     },
     "nimh": {                       // Low accuracy! Voltage is a poor indicator for NiMH
         "name": "NiMH",
-        "cell": 1.40,
+        "cell": 1.50,
         "sizes": [1],
-        "temperature": 0,
+        "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
-        "voltCoefficient": 0.0
+        "voltCoefficient": 0.03
     },
     "nicd": {
         "name": "NiCd",
@@ -47,17 +47,17 @@ const batteryTypes = {
         "name": "Lithium",
         "cell": 1.7,
         "sizes": [1, 2, 3, 6],
-        "temperature": 0,
+        "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.04
     },
     "lifepo": {                     // LiFePo
         "name": "LiFePo",
-        "cell": 13.6,
-        "sizes": [1],
+        "cell": 13.6,               // 13.6
+        "sizes": [1, 2, 3],
         "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
-        "voltCoefficient": 0.10588
+        "voltCoefficient": 0.10588  // 0.10588
     }
 }
 
