@@ -61,10 +61,25 @@ const batteryTypes = {
     }
 }
 
+/* JSON variable for storing selected battery types data
+ */
+export let batteryTypeData = null;
+
+/* Set batteryTypeData
+ */
+export function setBatteryTypeData(key) {
+    batteryTypeData = getBatteryType(key);
+}
+
+/* Returns the entire batteryTypes JSON
+ */
 export function getBatteryTypes() {
     return batteryTypes;
 }
 
+/* Get a single battery types data
+ * type: battery types json key
+ */
 export function getBatteryType(type) {
     return batteryTypes[type];
 }
