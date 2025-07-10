@@ -35,13 +35,20 @@ table {
 
 .column-container {
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.column {
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 .title {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   padding-bottom: 10px;
   padding-top: 20px;
@@ -115,11 +122,13 @@ button {
   padding-inline: 8px;
 }
 
-.buttons {
+.buttons, .logo-row {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
+  align-items: center;
 }
+
 
 .focused {
   background-color: #2e9f50;
@@ -162,7 +171,7 @@ footer {
 }
 
 @media (max-width: 630px) {
-  .footer, .column-container {
+  .footer, .column {
       flex-direction: column;
       text-align: center;
       align-items: center;
@@ -181,7 +190,6 @@ footer {
   .title {
     padding-bottom: 0px;
     padding-top: 0px;
-    flex-direction: column;
   }
   .h1 {
     margin-right: 8px;

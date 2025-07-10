@@ -9,7 +9,10 @@
 </head>
 <body id="body">
     <div class="title">
-        <h1>SoC Calculator</h1>
+        <div class="logo-row">
+            <img src="img/logo.png" alt="battery logo">
+            <h1>SoC Calculator</h1>
+        </div>
         <div class="buttons">
             <button id="submit-button" class="focused">Calculate</button>
             <button id="clear-button" disabled>Clear</button>
@@ -17,59 +20,61 @@
         </div>
     </div>
     <div class="column-container">
-        <div class="table-container">
-            <table>
-                <tr>
-                    <th>Battery Type</th>
-                    <td>
-                        <select type="text" id="bat-type" value="lead" disabled>
-                            <option value="nothing">Nothing!</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Voltage system</th>
-                    <td>
-                        <select type="text" id="v-system" value="" disabled>
-                            <option value="nothing">--</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Voltage</th>
-                    <td><input class="num-input" type="number" min="0" max="35" id="voltage" step="0.1" value="0"> Volts</td>
-                </tr>
-                <tr>
-                    <th>Temperature C</th>
-                    <td><input class="num-input" type="number" min="-50" max="50" id="temperature" value="22"> °C</td>
-                </tr>
-                <tr>
-                    <th>Capacity</th>
-                    <td><input class="num-input" type="number" min="0" id="capacity" value="60"> Ah</td>
-                </tr>
-            </table>
-            <br>
-        </div>
-        <div class="table-container">
-            <table id="output" hidden>
-                <tr>
-                    <th>SoC (Open circuit)</th>
-                    <td class="output" id="soc-oc"></td>
-                </tr>
-                <tr>
-                    <td hidden>SoC (Load Compencated)</th>
-                    <td class="output" id="soc-lc" hidden></td>
-                </tr>
-                <tr>
-                    <th>Remaining Energy</th>
-                    <td class="output" id="remain-oc"></td>
-                </tr>
-                <tr>
-                    <td hidden>Remaining (Load Compencated)</th>
-                    <td class="output" id="remain-lc" hidden></td>
-                </tr>
-            </table>
-            <br>
+        <div class="column">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Battery Type</th>
+                        <td>
+                            <select type="text" id="bat-type" value="lead" disabled>
+                                <option value="nothing">Nothing!</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Voltage system</th>
+                        <td>
+                            <select type="text" id="v-system" value="" disabled>
+                                <option value="nothing">--</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Voltage</th>
+                        <td><input class="num-input" type="number" min="0" max="35" id="voltage" step="0.1" value="0"> Volts</td>
+                    </tr>
+                    <tr>
+                        <th>Temperature C</th>
+                        <td><input class="num-input" type="number" min="-50" max="50" id="temperature" value="22"> °C</td>
+                    </tr>
+                    <tr>
+                        <th>Capacity</th>
+                        <td><input class="num-input" type="number" min="0" id="capacity" value="60"> Ah</td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+            <div class="table-container">
+                <table id="output" hidden>
+                    <tr>
+                        <th>SoC (Open circuit)</th>
+                        <td class="output" id="soc-oc"></td>
+                    </tr>
+                    <tr>
+                        <td hidden>SoC (Load Compencated)</th>
+                        <td class="output" id="soc-lc" hidden></td>
+                    </tr>
+                    <tr>
+                        <th>Remaining Energy</th>
+                        <td class="output" id="remain-oc"></td>
+                    </tr>
+                    <tr>
+                        <td hidden>Remaining (Load Compencated)</th>
+                        <td class="output" id="remain-lc" hidden></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
         </div>
     </div>
     <br>
