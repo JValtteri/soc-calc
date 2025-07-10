@@ -67,7 +67,7 @@ export function makeFullscreen() {
 
 /* Activate and show UI elements
  */
-function activateUI() {
+export function activateUI() {
     clearBtn.removeAttribute("disabled");      // Enables a button
     outputTable.removeAttribute("hidden");
 }
@@ -77,6 +77,65 @@ function activateUI() {
 export function deactivateUI() {
     clearBtn.setAttribute("disabled", "");      // Enables a button
     outputTable.setAttribute("hidden", "");
+}
+
+/* Updates all calculations
+ */
+export function update() {
+    updateInputs();
+    if (calculated) {
+        updateSoc();
+        updateRemaining();
+        //color.removeColors(factors);         // Remove any old colors
+        //color.setColors(factors);       // Set new colors
+    }
+}
+
+/* Used for the first time calculation
+ * Activates the UI and
+ * Updates all calculations
+ */
+export function submit() {
+    calculated = true;
+    activateUI();
+    update();
+}
+
+/* Clear calculations
+ */
+export function clear() {
+    clearBtn.setAttribute("disabled", "");
+    deactivateUI();
+    calculated = false;
+}
+
+/* Recalculates the Remaining energy and displays it
+ */
+export function updateRemaining() {
+    maxCapacity = parseFloat(capacityInput.value);
+    const ampHours = maxCapacity;
+    const remain = calc.calculateRemaining(voltage, ampHours, soc);
+    remainOc.textContent = remain + " Wh";
+}
+
+/* Recalculates the voltage system and populates the select element
+ */
+export function updateVoltageSystem() {
+    const element = systemInput;
+    util.clearOptions(element);
+    bat.setBatteryTypeData(typeInput.value);
+    const cells = bat.batteryTypeData.sizes;
+    util.populateSelect(element, cells, util.voltageInsert);
+}
+
+/* Fetches the battery types data and populates the select element
+ */
+export function updateBatteryTypes() {
+    const element = typeInput;
+    util.clearOptions(element);
+    const batteries = bat.getBatteryTypes();
+    util.populateSelect(element, batteries, util.batteryInsert);
+    updateVoltageSystem();
 }
 
 function updateInputs() {
@@ -98,47 +157,3 @@ function updateSoc() {
     socOc.textContent = soc + " %";
 }
 
-export function updateRemaining() {
-    maxCapacity = parseFloat(capacityInput.value);
-    const ampHours = maxCapacity;
-    const remain = calc.calculateRemaining(voltage, ampHours, soc);
-    remainOc.textContent = remain + " Wh";
-}
-
-export function update() {
-    updateInputs();
-    if (calculated) {
-        updateSoc();
-        updateRemaining();
-        //color.removeColors(factors);         // Remove any old colors
-        //color.setColors(factors);       // Set new colors
-    }
-}
-
-export function submit() {
-    calculated = true;
-    activateUI();
-    update();
-}
-
-export function clear() {
-    clearBtn.setAttribute("disabled", "");
-    deactivateUI();
-    calculated = false;
-}
-
-export function updateVoltageSystem() {
-    const element = systemInput;
-    util.clearOptions(element);
-    bat.setBatteryTypeData(typeInput.value);
-    const cells = bat.batteryTypeData.sizes;
-    util.populateSelect(element, cells, util.voltageInsert);
-}
-
-export function updateBatteryTypes() {
-    const element = typeInput;
-    util.clearOptions(element);
-    const batteries = bat.getBatteryTypes();
-    util.populateSelect(element, batteries, util.batteryInsert);
-    updateVoltageSystem();
-}

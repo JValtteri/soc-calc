@@ -2,7 +2,7 @@ import * as cookie from "./cookie.js"
 import * as ui from "./ui.js"
 
 /*
- * Buttons and Events
+ * Buttons Event Listeners
  */
 
 /* Submit button
@@ -41,7 +41,7 @@ ui.fullscreenBtn.addEventListener("click", () => {
 
 
 /*
- * Other
+ * Other Event Listeners
  */
 
 
