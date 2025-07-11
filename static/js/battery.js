@@ -37,7 +37,7 @@ const batteryTypes = {
     },
     "nicd": {
         "name": "NiCd",
-        "cell": 1.5,
+        "cell": 1.4,
         "sizes": [1, 2, 4, 8],
         "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
