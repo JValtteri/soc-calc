@@ -54,7 +54,7 @@ const batteryTypes = {
     "lithium": {                    // Low accuracy!
         "name": "Lithium",
         "cell": 1.7,
-        "sizes": [1, 2, 3, 6],
+        "sizes": [1, 2, 3, 6, 8, 10, 16, 32],
         "temperature": 20,
         "tempCoefficient": 0.0,     // No temperature coefficient recorded
         "voltCoefficient": 0.04
