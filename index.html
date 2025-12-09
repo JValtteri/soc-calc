@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoC Calculator</title>
+</head>
+<body id="body">
+    <div class="title">
+        <div class="logo-row">
+            <img src="img/logo.png" alt="battery logo">
+            <h1>SoC Calculator</h1>
+        </div>
+        <div class="buttons">
+            <button id="submit-button" class="focused">Calculate</button>
+            <button id="clear-button" disabled>Clear</button>
+            <button id="fullscreen" class="fullscreen">Fullscreen</button>
+        </div>
+    </div>
+    <div class="column-container">
+        <div class="column">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Battery Type</th>
+                        <td>
+                            <select type="text" id="bat-type" value="lead" disabled>
+                                <option value="nothing">Nothing!</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Voltage system</th>
+                        <td>
+                            <select type="text" id="v-system" value="" disabled>
+                                <option value="nothing">--</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Voltage</th>
+                        <td><input class="num-input" type="number" min="0" max="35" id="voltage" step="0.1" value="0"> Volts</td>
+                    </tr>
+                    <tr>
+                        <th>Temperature C</th>
+                        <td><input class="num-input" type="number" min="-50" max="50" id="temperature" value="22"> °C</td>
+                    </tr>
+                    <tr>
+                        <th>Capacity</th>
+                        <td><input class="num-input" type="number" min="0" id="capacity" value="60"> Ah</td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+            <div class="table-container">
+                <table id="output" hidden>
+                    <tr>
+                        <th>SoC (Open circuit)</th>
+                        <td class="output" id="soc-oc"></td>
+                    </tr>
+                    <tr>
+                        <td hidden>SoC (Load Compencated)</th>
+                        <td class="output" id="soc-lc" hidden></td>
+                    </tr>
+                    <tr>
+                        <th>Remaining Energy</th>
+                        <td class="output" id="remain-oc"></td>
+                    </tr>
+                    <tr>
+                        <td hidden>Remaining (Load Compencated)</th>
+                        <td class="output" id="remain-lc" hidden></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <footer class="footer">
+        <div class="footer-column" hidden>
+            <h4 class="footer-title">Readme</h4>
+            <a href="https://github.com/JValtteri/soc-calculator#how-to-use-the-calculator" class="footer-text">How to use the calculator</a>
+        </div>
+        <div class="footer-column">
+            <h4 class="footer-title">Source Code</h4>
+            <a href="https://github.com/JValtteri/soc-calc" class="footer-text">github.com/JValtteri/soc-calc</a>
+        </div>
+        <div class="footer-column" hidden>
+            <h4 class="footer-title">Data Retention</h4>
+            <input type="checkbox" id="accept">Remember Me
+            <div class="tooltip">
+                <span class="tooltip-trigger footer-text">Tell me more</span>
+                <div class="tooltiptext">
+                    <p>
+                        By checking the box "Remember Me", you allow your browser
+                        to save your calculations between sessions.
+                    </p>
+                    <p>
+                        This is done by storing cookies containing the information you have
+                        submitted. The cookies are not used for any other purpose.
+                    </p>
+                    <p>
+                        You can remove your cookie consent any time by unchecking the
+                        "Remember Me" checkbox or clearing the cookies through your browser.
+                    </p>
+                    <p>
+                        The server collects anonymous statistics on requests made to follow the
+                        load on the server and to diagnose any problems. Logs disappear on every
+                        server restart.
+                    </p>
+                </div>
+            </div>
+            <p>
+            </p>
+        </div>
+    </footer>
+</body>
+<script type="module" src="js/script.js"></script>
+</html>
